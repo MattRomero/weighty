@@ -17,6 +17,8 @@
 .weighty-card {
   background-color: #fff;
   border-radius: 1.25rem;
-  padding: 1.5rem 3.3rem;
+  padding: 1.5rem 1rem;
 }
+
+
 </style>
