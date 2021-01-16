@@ -15,7 +15,7 @@
               <div class="text-left">
                 <label>Contraseña</label>
                 <b-input-group size="md" class="mb-5">
-                  <b-form-input v-model="password"></b-form-input>
+                  <b-form-input type="password" v-model="password"></b-form-input>
                 </b-input-group>
               </div>
               <b-button block class="button mb-5" @click="signIn"

@@ -1,3 +1,8 @@
 body {
-    background-color: #F1F4FA;
+  background-color: #f1f4fa;
+}
+@media screen and (max-width: 991px) {
+  .mgt-1 {
+    margin-top: 1rem;
+  }
 }

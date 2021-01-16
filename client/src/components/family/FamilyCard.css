@@ -1,0 +1,32 @@
+.family__card .card-top,
+.family__card .card-bottom {
+  padding-top: 2.2rem;
+}
+.family__card h2 {
+  color: #48bca1;
+  font-size: 2.7rem;
+  font-weight: 400;
+}
+
+.family__card p {
+  font-weight: 300;
+}
+.family__card h3 {
+  font-weight: 900;
+}
+.family__card h3 span {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.family__card-btn {
+  background-color: #53e0bf;
+  border: none;
+  padding: 0.3rem 2rem;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+.family__card-btn:hover,
+.family__card-btn:focus {
+  background-color: #48bca1;
+}

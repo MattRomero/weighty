@@ -1,10 +1,10 @@
 <template>
 <b-container>
-    <b-row>
-        <b-col class="col-md-4 col-12">
+    <b-row class="d-flex justify-content-center">
+        <b-col class="col-12 col-md-8 col-lg-4">
             <ProfileCard :profileInfo="person"/>
         </b-col>
-        <b-col class="weighty-card">
+        <b-col class="weighty-card col-12 col-md-8 mgt-1">
             <h2>Mi progreso</h2>
             <LineChart :chartData="chartData"></LineChart>
         </b-col>
