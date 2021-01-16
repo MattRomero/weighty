@@ -42,33 +42,5 @@ export default {
 </script>
 
 <style scoped>
-.profile__card .card-top,
-.profile__card .card-bottom {
-  padding-top: 2.2rem;
-}
-.profile__card h2 {
-  color: #48BCA1;
-  font-size: 2.7rem;
-  font-weight: 400;
-}
-
-.profile__card p {
-  font-weight: 300;
-}
-.profile__card h3 {
-  font-weight: 900;
-}
-.profile__card h3 span {
-  font-size: 1rem;
-  font-weight: 400;
-}
-.profile__card .profile__card-btn {
-  background-color: #53E0BF;
-  border: none;
-  padding: 0.3rem 3rem;
-  border-radius: 0.5rem;
-  width: 100%;
-  
-}
-
+@import './ProfileCard.css';
 </style>

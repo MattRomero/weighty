@@ -1,12 +1,10 @@
 <template>
-  <div class="background-line-diagonal">
-    <b-row>
-      <b-col cols="4"></b-col>
-      <b-col cols="4">
+  <div class="background-line-diagonal pt-5">
+    <b-row class='m-0'>
+      <b-col class="col-12 col-md-4 mx-auto">
         <b-card class="text-center">
           <b-row>
-            <b-col cols="2"></b-col>
-            <b-col cols="8">
+            <b-col cols="8" class="mx-auto">
               <h1 class="mb-5">Inicio de sesión</h1>
               <div class="text-left">
                 <label>Nombre de usuario</label>
@@ -24,14 +22,13 @@
                 >Iniciar Sesion</b-button
               >
             </b-col>
-            <b-col cols="2"></b-col>
           </b-row>
           <b-alert v-model="show" variant="danger"
             >Inicio de sesión incorrecto</b-alert
           >
         </b-card>
       </b-col>
-      <b-col cols="4"></b-col> </b-row
+       </b-row
     ><br />
   </div>
 </template>
