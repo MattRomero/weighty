@@ -1,5 +1,5 @@
 <template>
-  <div class="profile__card">
+  <div class="weighty-card profile__card">
     <h2>{{ profileInfo.name }}</h2>
     <div class="card-top">
       <h3>{{profileInfo.weight}} <span>Kg</span></h3>
@@ -13,6 +13,7 @@
       <p>Objetivo</p>
       <b-button v-b-modal="'edit-modal'" class='profile__card-btn'>Editar</b-button>
     </div>
+    <!--- Modals start -->
   <b-modal id="update-modal" hide-footer>
     <template #modal-title>
         <h3>Actualizar peso</h3>
@@ -25,6 +26,7 @@
     </template>
     <b-form-input type="number"></b-form-input>
   </b-modal>
+      <!--- Modals end -->
   </div>
 </template>
 
@@ -40,11 +42,6 @@ export default {
 </script>
 
 <style scoped>
-.profile__card {
-    background-color: #fff;
-    border-radius: 1.25rem;
-    padding: 1.5rem 3.3rem;
-}
 .profile__card .card-top,
 .profile__card .card-bottom {
   padding-top: 2.2rem;

@@ -1,5 +1,5 @@
 <template>
-  <div class="background-line-diagonal mt-5">
+  <div class="background-line-diagonal">
     <b-row>
       <b-col cols="4"></b-col>
       <b-col cols="4">
@@ -76,6 +76,7 @@ export default {
 <style scoped>
 .background-line-diagonal {
   background-image: -webkit-linear-gradient(-109deg, white 50%, #53e0bf 50%);
+  height: 100vh;
 }
 .button {
   background-color: #53e0bf;
