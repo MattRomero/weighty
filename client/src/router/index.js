@@ -6,15 +6,14 @@ Vue.use(VueRouter);
 
 const routes = [
   ...login,
-  ...Profile,
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    path: "/layout",
+    name: "Layout",
+    component: () => import("../layout/Layout"),
+    children: [
+      /* Aqui van los componentes que se ven debajo de la barra de navegacion */
+      ...Profile,
+    ]
   }
 ];
 

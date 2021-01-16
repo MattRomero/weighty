@@ -26,7 +26,9 @@
             </b-col>
             <b-col cols="2"></b-col>
           </b-row>
-          <b-alert v-model="show" variant="danger">Inicio de sesión incorrecto</b-alert>
+          <b-alert v-model="show" variant="danger"
+            >Inicio de sesión incorrecto</b-alert
+          >
         </b-card>
       </b-col>
       <b-col cols="4"></b-col> </b-row
@@ -42,24 +44,32 @@ export default {
     return {
       user: "",
       password: "",
-      show: false
+      show: false,
+      idToken: ''
     };
   },
   methods: {
+    //test@test.net / test123
     signIn() {
       firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
       firebase
         .auth()
         .signInWithEmailAndPassword(this.user, this.password)
         .then(() => {
-         alert('si resulta')
+          firebase
+            .auth()
+            .currentUser.getIdToken(true)
+            .then((idToken) => {
+              this.idToken = idToken;
+              this.$router.push('/profile')
+            });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err.code);
-          this.show = true
+          this.show = true;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
