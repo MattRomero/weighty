@@ -38,21 +38,28 @@ export default {
           datasets: [
             {
               label: 'Peso',
-              data: [85, 80, 74, 80, 72, 83, 70, 65, 62, 50],
+              data: [85, 50, 74, 80, 72, 83, 70, 65, 62, 50],
               fill: false,
               borderColor: '#53E0BF',
               backgroundColor: '#53E0BF',
+              borderWidth: 1
+            },
+            {
+              label: 'IMC',
+              data: [23, 30, 20, 30, 30, 54, 54,23, 12, 43],
+              fill: false,
+              borderColor: '#56cfe1',
+              backgroundColor: '#56cfe1',
               borderWidth: 1
             }
           ]
             }
         }
         
-
 }
 }
 </script>
 
 <style scoped>
-@import './Profile.css'
+@import './Profile.css';
 </style>
