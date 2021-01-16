@@ -18,6 +18,12 @@
   text-align: center;
   color: #707070;
 }
+.weighty-card {
+  background-color: #fff;
+  border-radius: 1.25rem;
+  padding: 1.5rem 3.3rem;
+}
+
 
 #nav {
   padding: 30px;

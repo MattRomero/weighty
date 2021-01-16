@@ -1,5 +1,7 @@
 <template>
-  <Profile/>
+  <b-container>
+    <Profile/>
+  </b-container>
 </template>
 
 <script>
