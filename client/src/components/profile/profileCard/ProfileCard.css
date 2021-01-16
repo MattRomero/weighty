@@ -3,7 +3,7 @@
   padding-top: 2.2rem;
 }
 .profile__card h2 {
-  color: #48BCA1;
+  color: #48bca1;
   font-size: 2.7rem;
   font-weight: 400;
 }
@@ -18,10 +18,14 @@
   font-size: 1rem;
   font-weight: 400;
 }
-.profile__card .profile__card-btn {
-  background-color: #53E0BF;
+.profile__card-btn {
+  background-color: #53e0bf;
   border: none;
   padding: 0.3rem 3rem;
   border-radius: 0.5rem;
   width: 100%;
+}
+.profile__card-btn:hover,
+.profile__card-btn:focus {
+  background-color: #48bca1;
 }
