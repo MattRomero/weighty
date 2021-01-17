@@ -60,6 +60,7 @@ export default {
             .currentUser.getIdToken(true)
             .then(idToken => {
               this.idToken = idToken;
+              this.$store.commit('ID_TOKEN',this.idToken)
               this.$router.push("/profile");
             });
         })
