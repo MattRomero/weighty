@@ -5,7 +5,7 @@
             <ProfileCard :profileInfo="person"/>
         </b-col>
         <b-col class="weighty-card col-12 col-md-8 mgt-1">
-            <h2>Mi progreso</h2>
+            <h2>Progreso de {{person.name}}</h2>
             <LineChart :chartData="chartData"></LineChart>
         </b-col>
     </b-row>
@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import ProfileCard from './profileCard/ProfileCard';
+import ProfileCard from '../profile/profileCard/ProfileCard';
 import LineChart from '../Charts/LineChart';
 
 export default {
-    name: 'Profile',
+    name: "FamilyMember",
     components: {
         ProfileCard,
         LineChart
@@ -61,5 +61,4 @@ export default {
 </script>
 
 <style scoped>
-@import './Profile.css';
 </style>
