@@ -4,7 +4,7 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="#" class="px-2"></b-nav-item>
+          <b-nav-item to="#" class="px-2">hola a todos</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
