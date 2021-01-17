@@ -5,7 +5,6 @@ const TrackingSchema = mongoose.Schema({
     uidUser: String,
     entries:[],
     name: String,
-    bond: String,
     objective: Number,
     weightTarget: Number,
     diet: Number,
