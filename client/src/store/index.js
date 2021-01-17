@@ -23,13 +23,14 @@ export default new Vuex.Store({
       weightTarget: 0,
       height: 0,
       objective: ""
-    }
+    },
+    tracking: []
   },
   mutations: {
     ID_TOKEN(state, idToken) {
       state.id_token = idToken
     },
-    DATA_PROFILE(state, data){
+    DATA_PROFILE(state, data) {
       state.profile = data
     }
 
