@@ -5,13 +5,14 @@ var logger = require('morgan')
 const cors = require('cors')
 const admin = require('firebase-admin')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 const serviceAccount = require("./config/fbServiceAccountKey.json")
 const mongoURI = require("./config/mongouri.json")
 
 const User = require("./models/User")
 const Tracking = require('./models/Tracking')
-const IDCounters = require('./models/IDCounters')
+const Idcounters = require('./models/Idcounters')
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -21,9 +22,11 @@ var app = express();
 const port = 3000
 
 app.use(cors({
-  origin: 'http://192.168.100.9:8080',
+  origin: 'http://localhost:8081',
   credentials: true,
 }))
+
+app.use(bodyParser.json())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
@@ -82,6 +85,8 @@ app.get('/logout', (req, res) => {
 })
 
 
+// Crear ficha y modificar y obtener ficha
+
 app.get('/profile', (req, res) => {
   const userData = req.cookies.userdata
   let userObject = {};
@@ -101,9 +106,6 @@ app.get('/profile', (req, res) => {
             name: userResponse[0].name,
             mail: userResponse[0].test,
             objective: trackingResponse[0].objective,
-            weightTarget: trackingResponse[0].weightTarget,
-            diet: trackingResponse[0].diet,
-            physicalActivity: trackingResponse[0].physicalActivity,
             birth: trackingResponse[0].birth,
             sex: trackingResponse[0].sex,
             height: trackingResponse[0].height
@@ -116,46 +118,48 @@ app.get('/profile', (req, res) => {
 
 app.post('/profile', (req, res) => {
   const userData = req.cookies.userdata
-  
   User.find({ uid: userData.uid })
   .then((response) => {
-    
     // Solo si no existe el usuario
     if (response === undefined || response.length == 0) { 
-      //Se crea en db usuario
-      const newProfile = new User({
-        uid: userData.uid,
-        name: "Matias Romero",
-        mail: userData.mail,
-        personalTrackerID: "1",
-        friends: [],
-      })
-      newProfile.save()
+      let filter = {collectionName  : 'trackingcounter' }
+      let update = {$inc:{counter:1}}
+      Idcounters.findOneAndUpdate(filter, update, {useFindAndModify: false})
+      .then((updatedCounter) => {
+        let trackingCounter = updatedCounter.counter
+        //Se crea en db usuario
+        const newProfile = new User({
+          uid: userData.uid,
+          name: req.body.name,
+          mail: userData.mail,
+          personalTrackerID: trackingCounter,
+          friends: [],
+        })
+        newProfile.save()
       
-      trackingCounter = getNextSequenceValue('trackingcounter')
-      
-      // Se crea en db tracking
-      const newRecord = new Tracking({
-        id: trackingCounter,
-        uidUser: userData.uid,
-        entries:[],
-        name: "Matias",
-        bond: "",
-        objective: 2,
-        weightTarget: 60,
-        diet: 5,
-        physicalActivity: 2,
-        sex: 1,
-        height: 160
-      })
-      newRecord.save()
-
-      // Respuesta
-      .then(data => {
-        message: "record-created"
+        // Se crea en db tracking
+        const newRecord = new Tracking({
+          id: trackingCounter,
+          uidUser: userData.uid,
+          entries:[],
+          name: req.body.name,
+          objective: req.body.objective,
+          weightTarget: 0,
+          diet: 0,
+          physicalActivity: 0,
+          sex: req.body.sex,
+          height: req.body.height
+        })
+        newRecord.save()
+        .then(data => {
+          res.json({ message: "record-created" })
+        })
+        .catch(err => {
+          res.json({error: err})
+        })
       })
       .catch(err => {
-        res.json({error: err})
+        console.log(err)  
       })
     }
     else {
@@ -167,19 +171,73 @@ app.post('/profile', (req, res) => {
   })
 })
 
-function getNextSequenceValue(sequenceName){
-  let filter = {_id: sequenceName }
-  let update = {$inc:{sequence_value:1}}
-  var sequenceDocument = IDCounters.findOneAndUpdate(filter, update, {new : true})
-  return sequenceDocument.sequence_value;
-}
+app.put('/profile/', (req, res) => {
+  const userData = req.cookies.userdata
+  trackingBeingModified = req.params.id
+  let filter = { id : trackingBeingModified }
+  let update = req.body
+  Tracking.findOneAndUpdate(filter, update, {useFindAndModify: false})
+})
+
+// Crear fichas de amigos
+app.post('/tracking', (req, res) => {
+  const userData = req.cookies.userdata
+  let filter = {collectionName  : 'trackingcounter' }
+  let update = {$inc:{counter:1}}
+  Idcounters.findOneAndUpdate(filter, update, {useFindAndModify: false})
+  .then((updatedCounter) => {
+    let trackingCounter = updatedCounter.counter
+    const newRecord = new Tracking({
+      id: trackingCounter,
+      uidUser: userData.uid,
+      entries:[],
+      name: res.body.name,
+      objective: res.body.objective,
+      weightTarget: res.body.weightTarget,
+      diet: res.body.diet,
+      physicalActivity: res.body.physicalActivity,
+      sex: res.body.sex,
+      height: res.body.height
+    })
+    newRecord.save()
+    .then(data => {
+      let filter = {uid  : userData.uid }
+      let update = {$push:{friends:trackingCounter}}
+      User.findOneAndUpdate(filter, update, {useFindAndModify: false})
+      .then((res) => {
+        console.log(res)
+        res.json({ message: "tracking-created" })
+      })
+    })
+    .catch(err => {
+      res.json({error: err})
+    })
+  })
+})
+
+app.get('/tracking', (req, res) => {
+  const userData = req.cookies.userdata
+  User.find({ uid: userData.uid }).then((userRecord) => {
+    Tracking.find({ uid: userData.uid, id: { $ne: userRecord.personalTrackerID } }).then((userTrackingsArray) => {
+      res.json({ message: userTrackingArray })
+    })
+  })
+})
+
+
+
+app.put('/tracking/:id', (req, res) => {
+  const userData = req.cookies.userdata
+  trackingBeingModified = req.params.id
+  let filter = { id : trackingBeingModified }
+  let update = req.body
+  Tracking.findOneAndUpdate(filter, update, {useFindAndModify: false})
+})
 
 
 // DB Connection
 mongoose.connect(mongoURI.url, { useUnifiedTopology: true, useNewUrlParser: true }, () => console.log('Connected!'))
 
-
-
 app.listen(port, () => {
-  console.log(`Weighty server listening at http://localhost:${port}`)
+  console.log(`Weighty server listening at port: ${port}`)
 });
