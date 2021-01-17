@@ -21,10 +21,10 @@ admin.initializeApp({
 var app = express();
 const port = 3000
 
-app.use(cors({
-  origin: 'http://localhost:8081',
+/* app.use(cors({
+  origin: 'http://weightyapp.matromero.cl/',
   credentials: true,
-}))
+})) */
 
 app.use(bodyParser.json())
 app.use(logger('dev'));
@@ -52,7 +52,6 @@ function checkAuth(req, res, next) {
             (sessionCookie) => {
               const options = { maxAge: expiresIn, httpOnly: true }
               res.cookie("session", sessionCookie, options)
-              console.log(sessionCookie)
               res.cookie("userdata", { uid: userInfo.uid, mail: userRecord.providerData[0].email},options)
               next()
             }
@@ -108,7 +107,8 @@ app.get('/profile', (req, res) => {
             objective: trackingResponse[0].objective,
             birth: trackingResponse[0].birth,
             sex: trackingResponse[0].sex,
-            height: trackingResponse[0].height
+            height: trackingResponse[0].height,
+            weightTarget: trackingResponse[0].weightTarget
           }
         })
       })
@@ -128,6 +128,7 @@ app.post('/profile', (req, res) => {
       .then((updatedCounter) => {
         let trackingCounter = updatedCounter.counter
         //Se crea en db usuario
+        console.log(req.body)
         const newProfile = new User({
           uid: userData.uid,
           name: req.body.name,
@@ -144,7 +145,7 @@ app.post('/profile', (req, res) => {
           entries:[],
           name: req.body.name,
           objective: req.body.objective,
-          weightTarget: 0,
+          weightTarget: req.body.weightTarget,
           diet: 0,
           physicalActivity: 0,
           sex: req.body.sex,
@@ -194,8 +195,8 @@ app.post('/tracking', (req, res) => {
       name: res.body.name,
       objective: res.body.objective,
       weightTarget: res.body.weightTarget,
-      diet: res.body.diet,
-      physicalActivity: res.body.physicalActivity,
+      diet: 0,
+      physicalActivity: 0,
       sex: res.body.sex,
       height: res.body.height
     })
