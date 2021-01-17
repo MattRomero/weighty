@@ -2,12 +2,14 @@ import Vue from "vue";
 import login from "../login/router";
 import VueRouter from "vue-router";
 import Profile from "../components/profile/router";
+import Register from '../register/router'
 import { Family, FamilyDetails } from "../components/family/router";
 
 Vue.use(VueRouter);
 
 const routes = [
   ...login,
+  ...Register,
   {
     path: '/',
     name: 'home',
