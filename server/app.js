@@ -19,7 +19,10 @@ admin.initializeApp({
 var app = express();
 const port = 3000
 
-app.use(cors())
+app.use(cors({
+  origin: 'http://192.168.100.9:8080',
+  credentials: true,
+}))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
@@ -45,6 +48,7 @@ function checkAuth(req, res, next) {
             (sessionCookie) => {
               const options = { maxAge: expiresIn, httpOnly: true }
               res.cookie("session", sessionCookie, options)
+              console.log(sessionCookie)
               res.cookie("userdata", { uid: userInfo.uid, mail: userRecord.providerData[0].email},options)
               next()
             }
