@@ -5,11 +5,11 @@
         <b-card class="text-center">
           <b-row>
             <b-col cols="8" class="mx-auto">
-              <h1 class="mb-5">Inicio de sesión</h1>
+              <h1 class="mb-5">Regístrate</h1>
               <div class="text-left">
-                <label>Nombre de usuario</label>
+                <label>Correo</label>
                 <b-input-group size="md" class="mb-4">
-                  <b-form-input v-model="user"></b-form-input>
+                  <b-form-input v-model="email"></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
@@ -21,14 +21,11 @@
                   ></b-form-input>
                 </b-input-group>
               </div>
-              <b-button block class="button mb-5" @click="signIn" key.up="enter"
-                >Iniciar Sesion</b-button
+              <b-button block class="button mb-5" @click="register"
+                >Crear cuenta</b-button
               >
             </b-col>
           </b-row>
-          <b-alert v-model="show" variant="danger"
-            >Inicio de sesión incorrecto</b-alert
-          >
         </b-card>
       </b-col> </b-row
     ><br />
@@ -38,35 +35,24 @@
 <script>
 import firebase from "firebase";
 export default {
-  name: "LogIn",
+  name: "Signup",
   data() {
     return {
-      user: "",
-      password: "",
-      show: false,
-      idToken: ""
+      email: "",
+      password: ""
     };
   },
   methods: {
     //test@test.net / test123
-    signIn() {
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+    register() {
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.user, this.password)
+        .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          firebase
-            .auth()
-            .currentUser.getIdToken(true)
-            .then(idToken => {
-              this.idToken = idToken;
-              this.$store.commit('ID_TOKEN',this.idToken)
-              this.$store.dispatch('actionLogin')
-            });
+          alert("se ha registrado");
         })
-        .catch(err => {
-          console.log(err.code);
-          this.show = true;
+        .catch(res => {
+          console.log(res.code);
         });
     }
   }
