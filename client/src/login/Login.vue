@@ -1,6 +1,6 @@
 <template>
   <div class="background-line-diagonal pt-5">
-    <b-row class='m-0'>
+    <b-row class="m-0">
       <b-col class="col-12 col-md-4 mx-auto">
         <b-card class="text-center">
           <b-row>
@@ -15,7 +15,10 @@
               <div class="text-left">
                 <label>Contraseña</label>
                 <b-input-group size="md" class="mb-5">
-                  <b-form-input type="password" v-model="password"></b-form-input>
+                  <b-form-input
+                    type="password"
+                    v-model="password"
+                  ></b-form-input>
                 </b-input-group>
               </div>
               <b-button block class="button mb-5" @click="signIn"
@@ -27,8 +30,7 @@
             >Inicio de sesión incorrecto</b-alert
           >
         </b-card>
-      </b-col>
-       </b-row
+      </b-col> </b-row
     ><br />
   </div>
 </template>
@@ -42,7 +44,7 @@ export default {
       user: "",
       password: "",
       show: false,
-      idToken: ''
+      idToken: ""
     };
   },
   methods: {
@@ -56,17 +58,17 @@ export default {
           firebase
             .auth()
             .currentUser.getIdToken(true)
-            .then((idToken) => {
+            .then(idToken => {
               this.idToken = idToken;
-              this.$router.push('/register')
+              this.$router.push("/profile");
             });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err.code);
           this.show = true;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

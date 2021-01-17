@@ -1,19 +1,16 @@
 <template>
   <b-container>
-    <Profile/>
+    <Profile />
   </b-container>
 </template>
 
 <script>
-import Profile from '../components/profile/Profile';
+import Profile from "../components/profile/Profile";
 export default {
-    components: {
-        Profile,
-    }
-
-}
+  components: {
+    Profile
+  }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

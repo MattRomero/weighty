@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Nav from '../components/Nav'
+import Nav from "../components/Nav";
 export default {
-  name: 'Layout',
+  name: "Layout",
   components: {
     Nav
   }
-}
+};
 </script>
