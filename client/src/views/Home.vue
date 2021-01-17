@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 body {
   background-image: -webkit-linear-gradient(-109deg, white 50%, #53e0bf 50%);
 }

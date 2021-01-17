@@ -58,7 +58,7 @@ export default {
             .currentUser.getIdToken(true)
             .then((idToken) => {
               this.idToken = idToken;
-              this.$router.push('/register')
+              this.$router.push('/profile')
             });
         })
         .catch((err) => {
