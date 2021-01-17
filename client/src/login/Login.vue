@@ -21,7 +21,7 @@
                   ></b-form-input>
                 </b-input-group>
               </div>
-              <b-button block class="button mb-5" @click="signIn"
+              <b-button block class="button mb-5" @click="signIn" key.up="enter"
                 >Iniciar Sesion</b-button
               >
             </b-col>
@@ -60,7 +60,8 @@ export default {
             .currentUser.getIdToken(true)
             .then(idToken => {
               this.idToken = idToken;
-              this.$router.push("/profile");
+              this.$store.commit('ID_TOKEN',this.idToken)
+              this.$store.dispatch('actionLogin')
             });
         })
         .catch(err => {
