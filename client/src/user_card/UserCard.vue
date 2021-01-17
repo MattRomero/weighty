@@ -9,13 +9,16 @@
               <div class="text-left">
                 <label>Nombre</label>
                 <b-input-group size="md" class="mb-3">
-                  <b-form-input></b-form-input>
+                  <b-form-input v-model="card_user.user" type="text"></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
                 <label>Fecha de nacimiento</label>
                 <b-input-group size="md" class="mb-3">
-                  <b-form-input></b-form-input>
+                  <b-form-input
+                    type="date"
+                    v-model="card_user.date"
+                  ></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
@@ -23,42 +26,35 @@
                 <b-form-group>
                   <b-form-radio-group
                     id="radio-group-1"
-                    v-model="selected_radio"
+                    v-model="card_user.selected_radio"
                     :options="options_radio"
-                    :aria-describedby="ariaDescribedby"
                     name="radio-options"
                   ></b-form-radio-group>
                 </b-form-group>
               </div>
               <div class="text-left">
-                <label>Peso</label>
+                <label>Peso deseado</label>
                 <b-input-group size="md" class="mb-3">
-                  <b-form-input type="number"></b-form-input>
+                  <b-form-input
+                    type="number"
+                    v-model="card_user.weight"
+                  ></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
                 <label>Altura</label>
                 <b-input-group size="md" class="mb-3">
-                  <b-form-input type="number"></b-form-input>
-                </b-input-group>
-              </div>
-              <div class="text-left">
-                <label>Tipo de dieta</label>
-                <b-input-group size="md" class="mb-3">
-                  <b-form-input></b-form-input>
-                </b-input-group>
-              </div>
-              <div class="text-left">
-                <label>Actividad física</label>
-                <b-input-group size="md" class="mb-3">
-                  <b-form-input></b-form-input>
+                  <b-form-input
+                    type="number"
+                    v-model="card_user.height"
+                  ></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
                 <label>Objetivo</label>
                 <b-input-group size="md" class="mb-3">
                   <b-form-select
-                    v-model="selected_select"
+                    v-model="card_user.selected_select"
                     :options="options_select"
                   ></b-form-select>
                 </b-input-group>
@@ -76,29 +72,31 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  name: "Register",
+  name: "UserCard",
   data() {
     return {
-      selected_radio: null,
-      selected_select: null,
       options_radio: [
         { text: "Hombre", value: 1 },
-        { text: "Mujer", value: 2 }
+        { text: "Mujer", value: 2 },
       ],
       options_select: [
         { value: 1, text: "Bajar de peso" },
         { value: 2, text: "Subir de peso" },
         { value: 3, text: "Quemar grasa" },
-        { value: 4, text: "Tonificar" }
-      ]
+        { value: 4, text: "Tonificar" },
+      ],
     };
   },
   methods: {
     nextToStep() {
-      this.$router.push("/profile");
-    }
-  }
+      this.$store.dispatch("actionPostProfile");
+    },
+  },
+  computed: {
+    ...mapState(["card_user"]),
+  },
 };
 </script>
 
