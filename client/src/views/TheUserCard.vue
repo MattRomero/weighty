@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Register />
+    <UserCard />
   </div>
 </template>
 
 <script>
-import Register from "../register/Register";
+import UserCard from "../user_card/UserCard";
 export default {
-  name: "TheRegister",
+  name: "TheUserCard",
   components: {
-    Register,
+    UserCard,
   },
 };
 </script>

@@ -1,15 +1,18 @@
 import Vue from "vue";
 import login from "../login/router";
+import Signup from '../signup/router'
 import VueRouter from "vue-router";
 import Profile from "../components/profile/router";
-import Register from '../register/router'
+import UserCard from '../user_card/router'
 import { Family, FamilyDetails } from "../components/family/router";
+
 
 Vue.use(VueRouter);
 
 const routes = [
   ...login,
-  ...Register,
+  ...Signup,
+  ...UserCard,
   {
     path: '/',
     name: 'home',
@@ -20,7 +23,6 @@ const routes = [
     name: "Layout",
     component: () => import("../layout/Layout"),
     children: [
-      /* Aqui van los componentes que se ven debajo de la barra de navegacion */
       ...Profile,
       ...Family,
       ...FamilyDetails,
