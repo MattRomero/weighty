@@ -9,3 +9,19 @@ const client = Axios.create({
 export {client}
 
 
+const getLogin = async (token)=>{
+    const GetLogin = await client.get(`/login`,{
+        headers:{
+            'AuthToken': token
+        }
+      })
+    return GetLogin
+ }
+ 
+ const getProfile = async ()=>{
+    const GetProfile = await client.get(`/profile`)
+    return GetProfile
+ }
+
+export {getLogin}
+export {getProfile}
