@@ -8,6 +8,8 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import firebase from "firebase";
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuelidate from 'vuelidate'
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyBNpr-ziuoAI-F_vgjjjMetkghT-Amg71Q",
@@ -21,6 +23,7 @@ firebase.initializeApp({
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
+Vue.use(Vuelidate)
 
 new Vue({
   router,

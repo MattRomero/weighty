@@ -9,7 +9,10 @@
               <div class="text-left">
                 <label>Nombre</label>
                 <b-input-group size="md" class="mb-3">
-                  <b-form-input v-model="card_user.user" type="text"></b-form-input>
+                  <b-form-input
+                    v-model="card_user.user"
+                    type="text"
+                  ></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
@@ -73,6 +76,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { required, minLength, between } from "vuelidate/lib/validators";
 export default {
   name: "UserCard",
   data() {
@@ -88,6 +92,19 @@ export default {
         { value: 4, text: "Tonificar" },
       ],
     };
+  },
+  validations: {
+    user: {
+      required,
+      minLength: minLength(4),
+    },
+    date: {
+      required,
+    },
+    height:{
+      required,
+      between: between(20, 100)
+    }
   },
   methods: {
     nextToStep() {
