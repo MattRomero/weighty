@@ -11,6 +11,7 @@ const mongoURI = require("./config/mongouri.json")
 
 const User = require("./models/User")
 const Tracking = require('./models/Tracking')
+const IDCounters = require('./models/IDCounters')
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -95,7 +96,6 @@ app.get('/profile', (req, res) => {
     else {
       Tracking.find({ uidUser: userData.uid })
       .then((trackingResponse) => {
-        console.log(trackingResponse)
         res.json({
           message: {
             name: userResponse[0].name,
@@ -132,9 +132,11 @@ app.post('/profile', (req, res) => {
       })
       newProfile.save()
       
+      trackingCounter = getNextSequenceValue('trackingcounter')
+      
       // Se crea en db tracking
       const newRecord = new Tracking({
-        id: 1,
+        id: trackingCounter,
         uidUser: userData.uid,
         entries:[],
         name: "Matias",
@@ -164,6 +166,13 @@ app.post('/profile', (req, res) => {
     }
   })
 })
+
+function getNextSequenceValue(sequenceName){
+  let filter = {_id: sequenceName }
+  let update = {$inc:{sequence_value:1}}
+  var sequenceDocument = IDCounters.findOneAndUpdate(filter, update, {new : true})
+  return sequenceDocument.sequence_value;
+}
 
 
 // DB Connection
