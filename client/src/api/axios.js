@@ -2,7 +2,7 @@ import Axios from 'axios'
 
 
 const client = Axios.create({
-  baseURL: 'https://https://weight-app.matromero.cl/',
+  baseURL: 'https://weight-app.matromero.cl/',
   json: true,
   withCredentials: true
 })
