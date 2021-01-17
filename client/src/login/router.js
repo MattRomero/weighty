@@ -1,6 +1,6 @@
 const Login = [
   {
-    path: "/",
+    path: "/login",
     name: "login",
     component: () => import("../views/TheLogin.vue")
   }

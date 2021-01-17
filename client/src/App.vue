@@ -18,6 +18,7 @@
   background-color: #fff;
   border-radius: 1.25rem;
   padding: 1.5rem 1rem;
+  max-width: 500px;
 }
 
 
