@@ -84,21 +84,21 @@ export default {
       selected_select: null,
       options_radio: [
         { text: "Hombre", value: 1 },
-        { text: "Mujer", value: 2 },
+        { text: "Mujer", value: 2 }
       ],
       options_select: [
         { value: 1, text: "Bajar de peso" },
         { value: 2, text: "Subir de peso" },
         { value: 3, text: "Quemar grasa" },
-        { value: 4, text: "Tonificar" },
-      ],
+        { value: 4, text: "Tonificar" }
+      ]
     };
   },
   methods: {
     nextToStep() {
       this.$router.push("/profile");
-    },
-  },
+    }
+  }
 };
 </script>
 
