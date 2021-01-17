@@ -9,26 +9,17 @@
               <div class="text-left">
                 <label>Nombre de usuario</label>
                 <b-input-group size="md" class="mb-4">
-                  <b-form-input v-model="user"></b-form-input>
+                  <b-form-input v-model="name_user"></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
                 <label>Correo</label>
                 <b-input-group size="md" class="mb-4">
-                  <b-form-input v-model="user"></b-form-input>
+                  <b-form-input v-model="email"></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
                 <label>Contraseña</label>
-                <b-input-group size="md" class="mb-5">
-                  <b-form-input
-                    type="password"
-                    v-model="password"
-                  ></b-form-input>
-                </b-input-group>
-              </div>
-              <div class="text-left">
-                <label>Confirmar contraseña</label>
                 <b-input-group size="md" class="mb-5">
                   <b-form-input
                     type="password"
