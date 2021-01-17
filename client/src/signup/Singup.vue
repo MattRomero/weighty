@@ -27,14 +27,20 @@
                   ></b-form-input>
                 </b-input-group>
               </div>
-              <b-button block class="button mb-5" @click="signIn"
+              <div class="text-left">
+                <label>Confirmar Contraseña</label>
+                <b-input-group size="md" class="mb-5">
+                  <b-form-input
+                    type="password"
+                    v-model="password"
+                  ></b-form-input>
+                </b-input-group>
+              </div>
+              <b-button block class="button mb-5" @click="register"
                 >Crear cuenta</b-button
               >
             </b-col>
           </b-row>
-          <b-alert v-model="register" variant="danger"
-            >Inicio de sesión incorrecto</b-alert
-          >
         </b-card>
       </b-col> </b-row
     ><br />
