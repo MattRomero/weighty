@@ -74,18 +74,18 @@ export default {
       form: {
         name: "",
         objective: [
-        { value: 1, text: "Bajar de peso" },
-        { value: 2, text: "Subir de peso" },
-        { value: 3, text: "Quemar grasa" },
-        { value: 4, text: "Tonificar" },
-      ],
+          { value: 1, text: "Bajar de peso" },
+          { value: 2, text: "Subir de peso" },
+          { value: 3, text: "Quemar grasa" },
+          { value: 4, text: "Tonificar" }
+        ],
         weightTarget: null,
         sex: [
-        { text: "Hombre", value: 1 },
-        { text: "Mujer", value: 2 },
-      ],
-        height: null,
-      },
+          { text: "Hombre", value: 1 },
+          { text: "Mujer", value: 2 }
+        ],
+        height: null
+      }
     };
   },
   methods: {
@@ -95,8 +95,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(["tracking"]),
-  },
+    ...mapState(["tracking"])
+  }
 };
 </script>
 

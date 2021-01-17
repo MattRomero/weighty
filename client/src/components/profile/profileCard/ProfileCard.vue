@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
   name: "ProfileCard",
   data() {
@@ -76,8 +76,8 @@ export default {
       console.log(`${this.form.weight} es tu nuevo peso`);
     }
   },
-    computed:{
-    ...mapState(['profile'])
+  computed: {
+    ...mapState(["profile"])
   }
 };
 </script>

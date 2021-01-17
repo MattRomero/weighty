@@ -9,7 +9,10 @@
               <div class="text-left">
                 <label>Nombre</label>
                 <b-input-group size="md" class="mb-3">
-                  <b-form-input v-model="card_user.user" type="text"></b-form-input>
+                  <b-form-input
+                    v-model="card_user.user"
+                    type="text"
+                  ></b-form-input>
                 </b-input-group>
               </div>
               <div class="text-left">
@@ -79,24 +82,24 @@ export default {
     return {
       options_radio: [
         { text: "Hombre", value: 1 },
-        { text: "Mujer", value: 2 },
+        { text: "Mujer", value: 2 }
       ],
       options_select: [
         { value: 1, text: "Bajar de peso" },
         { value: 2, text: "Subir de peso" },
         { value: 3, text: "Quemar grasa" },
-        { value: 4, text: "Tonificar" },
-      ],
+        { value: 4, text: "Tonificar" }
+      ]
     };
   },
   methods: {
     nextToStep() {
       this.$store.dispatch("actionPostProfile");
-    },
+    }
   },
   computed: {
-    ...mapState(["card_user"]),
-  },
+    ...mapState(["card_user"])
+  }
 };
 </script>
 
