@@ -12,7 +12,7 @@
         </button>
       </b-col>
       <b-col
-        v-for="member in familyMembers"
+        v-for="member in tracking"
         :key="member.id"
         class="col-12 col-md-4 mt-4"
       >
@@ -61,6 +61,7 @@
 
 <script>
 import FamilyCard from "./FamilyCard";
+import { mapState } from "vuex";
 
 export default {
   name: "Family",
@@ -68,31 +69,34 @@ export default {
   components: {
     FamilyCard
   },
-  methods: {
-    addFamilyMember() {
-      this.familyMembers.unshift(this.form);
-      this.form = {};
-    }
-  },
   data() {
     return {
       form: {
-        weigth: "",
-        name: ""
+        name: "",
+        objective: [
+        { value: 1, text: "Bajar de peso" },
+        { value: 2, text: "Subir de peso" },
+        { value: 3, text: "Quemar grasa" },
+        { value: 4, text: "Tonificar" },
+      ],
+        weightTarget: null,
+        sex: [
+        { text: "Hombre", value: 1 },
+        { text: "Mujer", value: 2 },
+      ],
+        height: null,
       },
-      familyMembers: [
-        {
-          id: 1,
-          name: "Eduardo",
-          weight: 49,
-          idealWeight: 62,
-          goal: "Subir de peso"
-        },
-        { id: 2, name: "Mamá", weight: 69, idealWeight: 62, goal: "Adelgazar" },
-        { id: 3, name: "Papá", weight: 69, idealWeight: 62, goal: "Tonificar" }
-      ]
     };
-  }
+  },
+  methods: {
+    addFamilyMember() {
+      this.$store.dispatch("actionPostTracking");
+      this.form = {};
+    }
+  },
+  computed: {
+    ...mapState(["tracking"]),
+  },
 };
 </script>
 
