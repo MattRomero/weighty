@@ -9,7 +9,7 @@ import Signup from "../signup/Singup";
 export default {
   name: "TheSignup",
   components: {
-    Signup,
-  },
+    Signup
+  }
 };
 </script>

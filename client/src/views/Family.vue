@@ -1,17 +1,14 @@
 <template>
-    <Family/>
+  <Family />
 </template>
 
 <script>
-import Family from '../components/family/Family';
+import Family from "../components/family/Family";
 export default {
-    components: {
-        Family,
-    }
-
-}
+  components: {
+    Family
+  }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
