@@ -43,7 +43,7 @@ export default new Vuex.Store({
       state.profile = data
     },
     DATA_TRACKING(state, data) {
-      state.trackingMember = data
+      state.tracking = data
     }
 
   },
@@ -74,7 +74,7 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    actionTracking(context) {
+    actionGetTracking(context) {
       const GetTracking = getTracking()
       GetTracking.then(res => {
         context.commit('DATA_TRACKING', res.data.message)
@@ -82,11 +82,11 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    actionPostTracking(state) {
-      let trackingMember = state.state.trackingMember
+    actionPostTracking({ state, dispatch }) {
+      let trackingMember = state.trackingMember
       const PostTracking = postTracking(trackingMember.name, trackingMember.objective, trackingMember.weightTarget, trackingMember.sex, trackingMember.height)
       PostTracking.then(res => {
-        console.log(res)
+        res.data.message === 'tracking-created' ? dispatch('actionGetTracking') : false
       }).catch(err => {
         console.log(err)
       })

@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <b-col class="col-12 col-md-6 col-lg-4 mt-4">
+      <b-col class="col-12 col-md-6 col-lg-4 mt-5 p-5">
         <button class="add-btn" v-b-modal="'add-modal'">
           <img
             src="../../assets/add.svg"
@@ -102,11 +102,18 @@ export default {
   methods: {
     addFamilyMember() {
       this.$store.dispatch("actionPostTracking");
-      this.form = {};
+
+    },
+    getTracking(){
+      this.$store.dispatch("actionGetTracking")
     }
   },
   computed: {
     ...mapState(["trackingMember", "tracking"]),
+
+  },
+  mounted() {
+        this.getTracking()
   },
 };
 </script>

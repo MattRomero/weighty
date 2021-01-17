@@ -2,8 +2,8 @@
   <div class="weighty-card family__card">
     <h2>{{ profileInfo.name }}</h2>
     <div class="card-top">
-      <h3>{{ profileInfo.weight }} <span>Kg</span></h3>
-      <p>Peso actual</p>
+      <h3>{{ profileInfo.weightTarget }} <span>Kg</span></h3>
+      <p>Peso deseado</p>
     </div>
     <div class="card-bottom">
       <router-link

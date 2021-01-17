@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const client = Axios.create({
-  baseURL: 'https://cors-anywhere.herokuapp.com/weight-app.matromero.cl:3000',
+  baseURL: 'https://weight-app.matromero.cl/',
   json: true,
   withCredentials: true
 })
