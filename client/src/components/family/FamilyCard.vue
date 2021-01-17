@@ -6,7 +6,9 @@
       <p>Peso actual</p>
     </div>
     <div class="card-bottom">
-      <b-button v-b-modal="'edit-modal'" class='family__card-btn'>Ver detalles</b-button>
+      <router-link :to="{ name: 'FamilyDetails', params: { memberId: profileInfo.id }}">
+              <b-button v-b-modal="'edit-modal'" class='family__card-btn'>Ver detalles</b-button>
+      </router-link>
     </div>
   </div>
 </template>

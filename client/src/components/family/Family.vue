@@ -1,12 +1,12 @@
 <template>
     <b-container>
         <b-row>
-            <b-col class="col-12 col-md-6 col-lg-4">
+            <b-col class="col-12 col-md-6 col-lg-4 mt-4">
                 <button class="add-btn" v-b-modal="'add-modal'">
                     <img src="../../assets/add.svg" class="pt-3" alt="add-icon" srcset=""/>
                 </button>
             </b-col>
-            <b-col v-for="member in familyMembers" :key="member.id" class="col-12 col-md-4">
+            <b-col v-for="member in familyMembers" :key="member.id" class="col-12 col-md-4 mt-4">
                 <FamilyCard :profileInfo="member"/>
             </b-col>
         </b-row>
@@ -71,8 +71,12 @@ export default {
 }
 </script>
 
-<style scoped>
-.add-btn {
+<style>
+body {
+    background: #f1f4fa;
+}
+
+button.add-btn {
     background: none;
     border: 0;
     outline: none;
