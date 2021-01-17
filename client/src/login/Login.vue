@@ -60,11 +60,7 @@ export default {
             .currentUser.getIdToken(true)
             .then(idToken => {
               this.idToken = idToken;
-<<<<<<< HEAD
-              this.$router.push('/profile')
-=======
               this.$router.push("/profile");
->>>>>>> eb24d32fa871f01a8afabb9764badb61e07f253e
             });
         })
         .catch(err => {
