@@ -4,6 +4,8 @@ import router from '../router/index';
 import { getLogin } from '../api/axios'
 import { getProfile } from '../api/axios'
 import { postProfile } from '../api/axios'
+import { getTracking } from '../api/axios'
+import { postTracking } from '../api/axios'
 
 Vue.use(Vuex);
 
@@ -24,7 +26,14 @@ export default new Vuex.Store({
       height: 0,
       objective: ""
     },
-    tracking: []
+    tracking: [],
+    trackingMember: {
+      name: '',
+      objective: null,
+      weightTarget: null,
+      sex: null,
+      height: null
+    }
   },
   mutations: {
     ID_TOKEN(state, idToken) {
@@ -32,6 +41,9 @@ export default new Vuex.Store({
     },
     DATA_PROFILE(state, data) {
       state.profile = data
+    },
+    DATA_TRACKING(state, data) {
+      state.trackingMember = data
     }
 
   },
@@ -58,6 +70,23 @@ export default new Vuex.Store({
       const PostProfile = postProfile(cardUser.user, cardUser.date, cardUser.weight, cardUser.height, cardUser.selected_radio, cardUser.selected_select)
       PostProfile.then(res => {
         res.message == 'record-created' ? router.push('profile') : false
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    actionTracking(context) {
+      const GetTracking = getTracking()
+      GetTracking.then(res => {
+        context.commit('DATA_TRACKING', res.data.message)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    actionPostTracking(state) {
+      let trackingMember = state.state.trackingMember
+      const PostTracking = postTracking(trackingMember.name, trackingMember.objective, trackingMember.weightTarget, trackingMember.sex, trackingMember.height)
+      PostTracking.then(res => {
+        console.log(res)
       }).catch(err => {
         console.log(err)
       })

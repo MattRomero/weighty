@@ -32,19 +32,35 @@
               label="Nombre:"
               label-for="input-1"
             >
-              <b-form-input id="input-1" v-model="form.name"></b-form-input>
+              <b-form-input id="input-1" v-model="trackingMember.name"></b-form-input>
             </b-form-group>
-            <b-form-group
+           <b-form-group label="Sexo:">
+                  <b-form-radio-group
+                    id="radio-group-1"
+                    v-model="trackingMember.sex"
+                    :options="sex"
+                    name="radio-options"
+                  ></b-form-radio-group>
+            </b-form-group>
+            <b-form-group label="Objetivo:" size="md" class="mb-3">
+                  <b-form-select
+                    v-model="trackingMember.objective"
+                    :options="objective"
+                  ></b-form-select>
+            </b-form-group>
+             <b-form-group
+              class="mx-auto"
+              label="Peso deseado:"
+            >
+              <b-form-input id="input-1" type="number" v-model="trackingMember.weightTarget"></b-form-input>
+            </b-form-group>
+             <b-form-group
               class="mx-auto"
               id="input-group-2"
-              label="Peso:"
-              label-for="input-2"
+              label="Altura:"
+              label-for="input-1"
             >
-              <b-form-input
-                type="number"
-                id="input-2"
-                v-model="form.weight"
-              ></b-form-input>
+              <b-form-input id="input-1" type="number" v-model="trackingMember.height"></b-form-input>
             </b-form-group>
             <b-button
               @click="$bvModal.hide('add-modal')"
@@ -71,21 +87,16 @@ export default {
   },
   data() {
     return {
-      form: {
-        name: "",
-        objective: [
+      objective: [
         { value: 1, text: "Bajar de peso" },
         { value: 2, text: "Subir de peso" },
         { value: 3, text: "Quemar grasa" },
         { value: 4, text: "Tonificar" },
       ],
-        weightTarget: null,
-        sex: [
+      sex: [
         { text: "Hombre", value: 1 },
         { text: "Mujer", value: 2 },
-      ],
-        height: null,
-      },
+      ]
     };
   },
   methods: {
@@ -95,7 +106,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["tracking"]),
+    ...mapState(["trackingMember", "tracking"]),
   },
 };
 </script>
