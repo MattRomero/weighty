@@ -51,8 +51,15 @@ const postTracking = async (name, objective, weightTarget, sex, height) => {
   })
   return PostTracking
 }
+
+const getTrackingId = async (id) => {
+  const getDataTracking = await client.get(`/tracking/${id}`)
+  return getDataTracking
+}
+
 export { getLogin }
 export { getProfile }
 export { postProfile }
 export { getTracking }
 export { postTracking }
+export { getTrackingId }
