@@ -60,8 +60,8 @@ export default {
             .currentUser.getIdToken(true)
             .then(idToken => {
               this.idToken = idToken;
-              this.$store.commit('ID_TOKEN',this.idToken)
-              this.$store.dispatch('actionLogin')
+              this.$store.commit("ID_TOKEN", this.idToken);
+              this.$store.dispatch("actionLogin");
             });
         })
         .catch(err => {

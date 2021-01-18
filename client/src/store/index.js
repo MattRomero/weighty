@@ -19,7 +19,7 @@ export default new Vuex.Store({
       weight: null,
       height: null,
       selected_radio: null,
-      selected_select: null,
+      selected_select: null
     },
     profile: {
       name: "",
@@ -39,7 +39,7 @@ export default new Vuex.Store({
   },
   mutations: {
     ID_TOKEN(state, idToken) {
-      state.id_token = idToken
+      state.id_token = idToken;
     },
     DATA_PROFILE(state, data) {
       state.profile = data
@@ -53,27 +53,36 @@ export default new Vuex.Store({
   },
   actions: {
     actionLogin({ state, dispatch }) {
-      const GetLogin = getLogin(state.id_token)
+      const GetLogin = getLogin(state.id_token);
       GetLogin.then(res => {
-        res.status == 200 ? dispatch('actionProfile') : false
+        res.status == 200 ? dispatch("actionProfile") : false;
       }).catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
     },
     actionProfile(context) {
-      const GetProfile = getProfile()
+      const GetProfile = getProfile();
       GetProfile.then(res => {
-        context.commit('DATA_PROFILE', res.data.message)
-        res.data.message === "record-not-found" ? router.push('/user-card') : router.push('/profile')
+        context.commit("DATA_PROFILE", res.data.message);
+        res.data.message === "record-not-found"
+          ? router.push("/user-card")
+          : router.push("/profile");
       }).catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
     },
     actionPostProfile(state) {
-      let cardUser = state.state.card_user
-      const PostProfile = postProfile(cardUser.user, cardUser.date, cardUser.weight, cardUser.height, cardUser.selected_radio, cardUser.selected_select)
+      let cardUser = state.state.card_user;
+      const PostProfile = postProfile(
+        cardUser.user,
+        cardUser.date,
+        cardUser.weight,
+        cardUser.height,
+        cardUser.selected_radio,
+        cardUser.selected_select
+      );
       PostProfile.then(res => {
-        res.message == 'record-created' ? router.push('profile') : false
+        res.message == "record-created" ? router.push("profile") : false;
       }).catch(err => {
         console.log(err)
       })

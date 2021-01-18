@@ -20,7 +20,7 @@ firebase.initializeApp({
   appId: "1:719031962826:web:3ba9acfa0dd850a17b7833"
 });
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(Vuelidate)
