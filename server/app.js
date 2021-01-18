@@ -22,7 +22,7 @@ var app = express();
 const port = 3000
 
 app.use(cors({
-  origin: 'http://localhost:8081', 
+  origin: 'https://blissful-montalcini-5da005.netlify.app/', 
   credentials: true,
 }))
 
