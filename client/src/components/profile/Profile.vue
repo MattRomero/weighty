@@ -2,7 +2,7 @@
   <b-container>
     <b-row class="d-flex justify-content-center">
       <b-col class="col-12 col-md-8 col-lg-4">
-        <ProfileCard :profileInfo="person" />
+        <ProfileCard :profileInfo="profile" />
       </b-col>
       <b-col class="weighty-card col-12 col-md-8 mgt-1">
         <h2>Mi progreso</h2>
@@ -15,6 +15,7 @@
 <script>
 import ProfileCard from "./profileCard/ProfileCard";
 import LineChart from "../Charts/LineChart";
+import { mapState } from 'vuex';
 
 export default {
   name: "Profile",
@@ -24,12 +25,6 @@ export default {
   },
   data() {
     return {
-      person: {
-        name: "Héctor",
-        weight: 69,
-        idealWeight: 62,
-        goal: "Tonificar"
-      },
       chartData: null
     };
   },
@@ -71,6 +66,9 @@ export default {
         ]
       };
     }
+  },
+  computed:{
+    ...mapState(['profile'])
   }
 };
 </script>

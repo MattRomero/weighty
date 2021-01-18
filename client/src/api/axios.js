@@ -52,12 +52,19 @@ const postTracking = async (name, objective, weightTarget, sex, height) => {
     objective: objective,
     weightTarget: +weightTarget,
     sex: sex,
-    height: +height
-  });
-  return PostTracking;
-};
-export { getLogin };
-export { getProfile };
-export { postProfile };
-export { getTracking };
-export { postTracking };
+    height: +height,
+  })
+  return PostTracking
+}
+
+const getTrackingId = async (id) => {
+  const getDataTracking = await client.get(`/tracking/${id}`)
+  return getDataTracking
+}
+
+export { getLogin }
+export { getProfile }
+export { postProfile }
+export { getTracking }
+export { postTracking }
+export { getTrackingId }

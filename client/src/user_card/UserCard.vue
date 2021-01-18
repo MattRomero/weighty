@@ -76,6 +76,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { required, minLength, between } from "vuelidate/lib/validators";
 export default {
   name: "UserCard",
   data() {
@@ -91,6 +92,19 @@ export default {
         { value: 4, text: "Tonificar" }
       ]
     };
+  },
+  validations: {
+    user: {
+      required,
+      minLength: minLength(4),
+    },
+    date: {
+      required,
+    },
+    height:{
+      required,
+      between: between(20, 100)
+    }
   },
   methods: {
     nextToStep() {

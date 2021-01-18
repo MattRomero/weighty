@@ -1,17 +1,17 @@
 <template>
   <div class="weighty-card profile__card">
-    <h2>{{ profile.name }}</h2>
+    <h2>{{ profileInfo.name }}</h2>
     <div class="card-top">
-      <h3>{{ profile.height }} <span>Kg</span></h3>
+      <h3>{{ profileInfo.height }} <span>Kg</span></h3>
       <p>Peso actual</p>
       <b-button v-b-modal="'update-modal'" class="profile__card-btn"
         >Actualizar</b-button
       >
     </div>
     <div class="card-bottom">
-      <h3>{{ profile.weightTarget }} <span>Kg</span></h3>
+      <h3>{{ profileInfo.weightTarget }} <span>Kg</span></h3>
       <p>Peso Meta</p>
-      <h4>{{ profile.objective }}</h4>
+      <h4>{{ getObjective(profileInfo.objective) }}</h4>
       <p>Objetivo</p>
       <b-button v-b-modal="'edit-modal'" class="profile__card-btn"
         >Editar</b-button
@@ -56,7 +56,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
   name: "ProfileCard",
   data() {
@@ -74,10 +73,16 @@ export default {
   methods: {
     updateWeight() {
       console.log(`${this.form.weight} es tu nuevo peso`);
+    },
+    getObjective(objective) {
+    const conversion = {
+      1: 'Bajar de peso',
+      2: 'Subir de peso',
+      3: 'Quemar grasa',
+      4: 'Tonificar',
     }
-  },
-  computed: {
-    ...mapState(["profile"])
+    return conversion[objective]
+  }
   }
 };
 </script>

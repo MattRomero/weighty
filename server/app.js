@@ -21,10 +21,10 @@ admin.initializeApp({
 var app = express();
 const port = 3000
 
-/* app.use(cors({
-  origin: 'http://weightyapp.matromero.cl/',
+app.use(cors({
+  origin: 'https://blissful-montalcini-5da005.netlify.app/', 
   credentials: true,
-})) */
+}))
 
 app.use(bodyParser.json())
 app.use(logger('dev'));
@@ -50,7 +50,7 @@ function checkAuth(req, res, next) {
           .createSessionCookie(req.headers.authtoken, { expiresIn })
           .then(
             (sessionCookie) => {
-              const options = { maxAge: expiresIn, httpOnly: true }
+              const options = { maxAge: expiresIn, httpOnly: true, sameSite: 'None', secure: true }
               res.cookie("session", sessionCookie, options)
               res.cookie("userdata", { uid: userInfo.uid, mail: userRecord.providerData[0].email},options)
               next()
@@ -192,21 +192,20 @@ app.post('/tracking', (req, res) => {
       id: trackingCounter,
       uidUser: userData.uid,
       entries:[],
-      name: res.body.name,
-      objective: res.body.objective,
-      weightTarget: res.body.weightTarget,
+      name: req.body.name,
+      objective: req.body.objective,
+      weightTarget: req.body.weightTarget,
       diet: 0,
       physicalActivity: 0,
-      sex: res.body.sex,
-      height: res.body.height
+      sex: req.body.sex,
+      height: req.body.height
     })
     newRecord.save()
     .then(data => {
       let filter = {uid  : userData.uid }
       let update = {$push:{friends:trackingCounter}}
       User.findOneAndUpdate(filter, update, {useFindAndModify: false})
-      .then((res) => {
-        console.log(res)
+      .then((res2) => {
         res.json({ message: "tracking-created" })
       })
     })
@@ -219,13 +218,27 @@ app.post('/tracking', (req, res) => {
 app.get('/tracking', (req, res) => {
   const userData = req.cookies.userdata
   User.find({ uid: userData.uid }).then((userRecord) => {
-    Tracking.find({ uid: userData.uid, id: { $ne: userRecord.personalTrackerID } }).then((userTrackingsArray) => {
-      res.json({ message: userTrackingArray })
+    Tracking.find({ uidUser: userData.uid, id: { $ne: userRecord.personalTrackerID } }).then((userTrackingsArray) => {
+      res.json({ message: userTrackingsArray })
     })
   })
 })
 
-
+app.get('/tracking/:id', (req, res) => {
+  const userData = req.cookies.userdata
+  trackingBeingRequested = req.params.id  
+  Tracking.find({ id : trackingBeingRequested }).then((trackingInfo) => {
+    res.json({
+      message: {
+        name: trackingInfo[0].name,
+        objective: trackingInfo[0].objective,
+        sex: trackingInfo[0].sex,
+        height: trackingInfo[0].height,
+        weightTarget: trackingInfo[0].weightTarget
+      }
+    })
+  })
+})
 
 app.put('/tracking/:id', (req, res) => {
   const userData = req.cookies.userdata

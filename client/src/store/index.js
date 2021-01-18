@@ -1,9 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import router from "../router/index";
-import { getLogin } from "../api/axios";
-import { getProfile } from "../api/axios";
-import { postProfile } from "../api/axios";
+import router from '../router/index';
+import { getLogin } from '../api/axios'
+import { getProfile } from '../api/axios'
+import { postProfile } from '../api/axios'
+import { getTracking } from '../api/axios'
+import { postTracking } from '../api/axios'
+import { getTrackingId } from '../api/axios'
 
 Vue.use(Vuex);
 
@@ -24,14 +27,28 @@ export default new Vuex.Store({
       height: 0,
       objective: ""
     },
-    tracking: []
+    tracking: [],
+    trackingMember: {
+      name: '',
+      objective: null,
+      weightTarget: null,
+      sex: null,
+      height: null
+    },
+    selected_tracking_id: null
   },
   mutations: {
     ID_TOKEN(state, idToken) {
       state.id_token = idToken;
     },
     DATA_PROFILE(state, data) {
-      state.profile = data;
+      state.profile = data
+    },
+    DATA_TRACKING(state, data) {
+      state.tracking = data
+    },
+    SELECTED_TRACKING_PROFILE(state, id) {
+      state.selected_tracking_id = id
     }
   },
   actions: {
@@ -67,8 +84,33 @@ export default new Vuex.Store({
       PostProfile.then(res => {
         res.message == "record-created" ? router.push("profile") : false;
       }).catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
+    },
+    actionGetTracking(context) {
+      const GetTracking = getTracking()
+      GetTracking.then(res => {
+        context.commit('DATA_TRACKING', res.data.message)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    actionPostTracking({ state, dispatch }) {
+      let trackingMember = state.trackingMember
+      const PostTracking = postTracking(trackingMember.name, trackingMember.objective, trackingMember.weightTarget, trackingMember.sex, trackingMember.height)
+      PostTracking.then(res => {
+        res.data.message === 'tracking-created' ? dispatch('actionGetTracking') : false
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    actionGetTrackingID ({state, commit}){
+      const GetTrackingId = getTrackingId(state.selected_tracking_id)
+      GetTrackingId.then(res => {
+        commit('DATA_PROFILE', res.data.message)
+      }).catch(err => {
+        console.log(err)
+      })
     }
   },
   modules: {}

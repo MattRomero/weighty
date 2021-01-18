@@ -2,14 +2,14 @@
   <div class="weighty-card family__card">
     <h2>{{ profileInfo.name }}</h2>
     <div class="card-top">
-      <h3>{{ profileInfo.weight }} <span>Kg</span></h3>
-      <p>Peso actual</p>
+      <h3>{{ profileInfo.weightTarget }} <span>Kg</span></h3>
+      <p>Peso deseado</p>
     </div>
     <div class="card-bottom">
       <router-link
         :to="{ name: 'FamilyDetails', params: { memberId: profileInfo.id } }"
       >
-        <b-button v-b-modal="'edit-modal'" class="family__card-btn"
+        <b-button v-b-modal="'edit-modal'" class="family__card-btn" @click="nextToTrackingProfile(profileInfo.id)"
           >Ver detalles</b-button
         >
       </router-link>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "FamilyCard",
   data() {
@@ -35,7 +36,14 @@ export default {
   methods: {
     updateWeight() {
       console.log(`${this.form.weight} es tu nuevo peso`);
-    }
+    },
+  nextToTrackingProfile(id){
+    this.$store.commit('SELECTED_TRACKING_PROFILE', id)
+    this.$store.dispatch('actionGetTrackingID')
+  }
+  },
+  computed: {
+    ...mapState(['tracking'])
   }
 };
 </script>
